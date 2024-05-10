@@ -1,0 +1,9 @@
+.header-top {
+  padding: 14px 0;
+}
+.header-top_right{
+  gap: 36px;
+}
+.header-cart{
+  position: relative;
+}
