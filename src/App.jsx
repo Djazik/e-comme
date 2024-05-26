@@ -23,12 +23,12 @@ function App() {
           <Route path="single/:id" element={<Single />} />
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<Login />} />
+        </Route>
           {isAuth ? (
             <Route path="admin" element={<Admin />} />
           ) : (
             <Route path="admin" element={<Navigate to="/login" />} />
           )}
-        </Route>
       </Routes>
     </BrowserRouter>
   );
