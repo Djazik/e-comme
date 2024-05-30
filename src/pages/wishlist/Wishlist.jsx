@@ -1,23 +1,18 @@
-import { useSelector } from "react-redux";
-import ProductCard from "../../components/card/ProductCard";
+import {  useSelector } from "react-redux";
+import { Products } from "../home/components";
+import Empty from "../../components/empty/Empty";
 
 export const Wishlist = () => {
-  const favourites = useSelector((state) => state.wishlist.favourites);
-  
+  let wishlist = useSelector(state => state.wishlist.value) 
+  console.log(wishlist)
   return (
-    <div className="container">
-      <h1 className="text-center">Wishlist</h1>
-      <div className="row">
-        {favourites.length > 0 ? (
-          favourites.map((item) => (
-            <div key={item.id} className="col-lg-3 col-12">
-              <ProductCard {...item} />
-            </div>
-          ))
-        ) : (
-          <p>No products in the wishlist</p>
-        )}
-      </div>
+    <div>
+      <h4 className="wishes">Wishes</h4>
+    {wishlist.length > 0 ? (
+        <Products   data={wishlist} />
+      ) : (
+        <Empty/>
+      )}
     </div>
   );
 };

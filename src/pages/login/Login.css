@@ -1,42 +1,80 @@
-.login{
-    padding: 32px 0;
-}
-.login-top{
-    background-color: #F6F7F8;
-}
-.login-body{
-    background-color: white;
-    padding: 117px 0 203px 0 ;
-}
-
-.login-label{
-    font-weight: 500;
-    font-size: 14px;
-    color: #373737;
-}
-.form-group{
+.login__border {
     display: flex;
+    justify-content: center;
+  }
+  
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 27px;
-
-}
-.login-input{
-    width: 498px;
-    height: 73px;
-    border-radius: 0px, 3px, 3px, 0px;
-    border: 1px solid #969393;
-    padding: 7px 12px;
-}
-.login-input:focus {
-    border-color: #33A0FF;
-    outline: none; 
-}
-.login-button{
-    border-radius: 10px;
-    width: 502px;
-    height: 70px;
-    background-color: #33A0FF;
-    color: white;
-    border: none;
-}
+    margin: 50px 0;
+    border-radius: 5px;
+    border: 1px solid #e9e9e9;
+    padding: 20px 30px;
+    width: 450px;
+  }
+  
+  .login__inp {
+      border: none;
+      padding: 10px 13px;
+  }
+  
+  .login__title {
+      font-weight: 400;
+      font-size: 15px;
+      lighting-color: 15px;
+      color: #444444;
+      padding-bottom: 9px;
+      padding-top: 29px;
+  }
+  
+  .see__btn {
+      height: 35px;
+      width: 40px;
+      border: none;
+      background-color: #fff;
+  }
+  
+  .inp__border {
+      border: 1px solid #E9E9E9;
+      display: flex;
+      justify-content: space-between;
+  }
+  
+  .login__btn {
+      background-color: #3BB77E;
+      color: #fff;
+      border-radius: 5px;
+      padding: 11px 21px;
+      border: none;
+      cursor: pointer;
+  }
+  
+  .remeber {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 25px;
+      align-items: center;
+  }
+  
+  .chackbox__title {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 15px;
+      color: #777777;
+    padding-top: 5px;
+    }
+  
+  .checkbox {
+      display: flex;
+    
+      gap: 10px;
+  }
+  
+  .sing {
+      display: flex;
+      margin-top: 24px;
+      justify-content: space-between;
+      align-items: center;
+  }

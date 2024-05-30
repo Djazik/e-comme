@@ -1,84 +1,98 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./Cart.css";
+import { useSelector, useDispatch } from "react-redux";
 import {
-  decrementQuantity,
-  incrementQuantity,
-} from "../../redux/slices/cartSlice";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+  incrementCart,
+  decrementCart,
+  removeFromCart,
+  deleteAllCart,
+} from "../../context/slice/cartSlice";
+import Empty from "../../components/empty/Empty";
+import "./Cart.css";
+import { CiCircleRemove } from "react-icons/ci";
 
 export const Cart = () => {
-  const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
-  const [totalPrice, setTotalPrice] = useState(null);
-  const [subTotal, setSubTotal] = useState(null);
-  const navigate = useNavigate();
-  useEffect(() => {
-    let total = 0;
-    products.forEach((product) => {
-      total += product.price * product.quantity;
-    });
-    setTotalPrice(total);
-  }, [products]);
-  useEffect(() => {
-    if (products.length > 0) {
-      let subtotal = 0;
-      products.forEach((product) => {
-        subtotal += product.price * product.quantity;
-      });
-      setSubTotal(subtotal);
-    } else {
-      setSubTotal(0);
-    }
-  }, [products]);
-  const goToDetails = (id) => {
-    navigate(`/single/${id}`);
-  };
+  const carts = useSelector((s) => s.cart.value);
+  console.log(carts);
+
+  let totalPrice = carts?.reduce((sum, el) => sum + el.price * el.quantity, 0);
+
+  let cartItems = carts?.map((el) => (
+    <div className="cart_item" key={el.id}>
+      <div className="cart__element">
+        <div className="cart__img">
+          <button
+            className="dalate__btn"
+            onClick={() => dispatch(removeFromCart(el.id))}
+          >
+            <CiCircleRemove />
+          </button>
+
+          <img src={el.image} width={150} alt="" />
+          <h2>{el.title}</h2>
+        </div>
+        <p>{el.price} USD</p>
+        <div className="cart__btn ">
+          <button
+            disabled={el.quantity <= 1}
+            onClick={() => dispatch(decrementCart(el))}
+          >
+            -
+          </button>
+          <span>{el.quantity}</span>
+          <button onClick={() => dispatch(incrementCart(el))}>+</button>
+        </div>
+        <b>{el.price * el.quantity} USD</b>
+      </div>
+    </div>
+  ));
+
   return (
-    <div className="container">
-      <h1>Cart</h1>
-      {products.length > 0 ? (
-        <div className="py-5">
-          {products.map((product) => (
-            <div key={product.id} className="">
-              <div className="d-flex align-items-center justify-content-between gap-2 mb-5">
-                <div className="d-flex align-items-center">
-                  <div className="cart-img">
-                    <img src={product.image} alt="" className="img-fluid" />
-                  </div>
-                  <p className="clas bervor jala" onClick={() => goToDetails(product.id)}>{product.title}</p>
-                </div>
-                <div className="d-flex align-items-center gap-2">
-                  <p>{product.price * product.quantity}$</p>
-                  <div className="d-flex gap-2 align-items-center">
-                    <button
-                      onClick={() => dispatch(decrementQuantity(product.id))}
-                      className="btn bg-info py-1 px-2"
-                    >
-                      -
-                    </button>
-                    <p>{product.quantity}</p>
-                    <button
-                      onClick={() => dispatch(incrementQuantity(product.id))}
-                      className="btn bg-info py-1 px-2"
-                    >
-                      +
-                    </button>
-                  </div>
-                  <p>{product.price}$</p>
-                </div>
-              </div>
-            </div>
-          ))}
-          <div className="">
-            <p>SubTotal:{subTotal}$</p>
-            <p>Shiping Fe:20$</p>
-            <p>Total price: {totalPrice + 20}$</p>
+    <div className=" container cart__wrapper">
+      <div className=" ">
+        <p>
+          Home / <span>Cart</span>
+        </p>
+        {carts.length > 0 && (
+          <div className="clear__all">
+            <button onClick={() => dispatch(deleteAllCart())}>
+              Delete All
+            </button>
+          </div>
+        )}
+        <div className="cart__title">
+          <h3>Product</h3>
+          <h3>Price</h3>
+          <h3>Quantity</h3>
+          <h3>Subtotal</h3>
+        </div>
+
+        <div className="cart_items">
+          {carts.length ? <div>{cartItems}</div> : <Empty />}
+        </div>
+      </div>
+      <div className="">
+        <div className="cart__promo">
+          <input type="text" placeholder="Voucher code" />
+          <button>Redeem</button>
+        </div>
+        <div className="cart__total">
+          <ul>
+            <li>
+              <h2>Subtotal</h2> <p>$998</p>
+            </li>
+            <li>
+              <h2>Shipping fee</h2> <p>$20</p>
+            </li>
+            <li>
+              <h2>Coupon</h2> <p>No</p>
+            </li>
+          </ul>
+          <div>
+            <h2>TOTAL</h2>
+            <p></p>
           </div>
         </div>
-      ) : (
-        <p>No products in the cart</p>
-      )}
+      </div>
     </div>
   );
 };

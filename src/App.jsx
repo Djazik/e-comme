@@ -7,11 +7,11 @@ import { Wishlist } from "./pages/wishlist";
 import { Single } from "./pages/single";
 import { Contact } from "./pages/contact";
 import { Login } from "./pages/login";
-import { Admin } from "./pages/admin";
+import { Admin } from "./pages/admin/Admin";
 import { useSelector } from "react-redux";
+import Auth from "./pages/auth/Auth";
 
 function App() {
-  const isAuth = useSelector((state) => state.auth.isAuth);
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -24,11 +24,14 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<Login />} />
         </Route>
-          {isAuth ? (
-            <Route path="admin" element={<Admin />} />
+        <Route path="/" element={<Auth/>}>
+          <Route path="/admin" element={<Admin/>}/>
+        </Route>
+        {/* {isAuth ? (
+        <Route path="admin" element={<Admin />} />
           ) : (
             <Route path="admin" element={<Navigate to="/login" />} />
-          )}
+          )} */}
       </Routes>
     </BrowserRouter>
   );

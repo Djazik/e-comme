@@ -1,86 +1,116 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import "./Login.css";
-import { useAddLoginMutation } from "../../redux/services/loginServices";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../redux/slices/authSlices";
+import React, { memo, useState } from "react";
+import { useNavigate, NavLink,  } from "react-router-dom";
+import { toast } from "react-toastify";
+import logo from "../../assets/images/logo.svg";
+import axios from "axios";
+import { FaRegEye, FaEyeSlash } from "react-icons/fa";
+import { API_URL } from "../../static";
+import "./Login.css"
+// import { usePostSignInMutation } from "../../context/api/usersApi";
 
 export const Login = () => {
-  const [addLogin] = useAddLoginMutation();
-  const token = useSelector((state) => state.auth.token);
+  // let [signUp, {data, isLoading,isSuccess,isError}] = usePostSignInMutation()
+  // if(isSuccess){
+  //   localStorage.setItem("token", data.token)
+  //   Navigate("/admin")
+  //   toast.success("Welcome");
+  // }
+
+  // if(isError){
+  //   toast.error("Username or Password is incorrect");
+  // }
+
+  // const handleSignUp = (e)=>{
+  //   signUp({username:"afs",password:"31"})
+  // }
+
+
+
+
+
+
+
+
+
+
+  const [ShowPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("mor_2314");
+  const [password, setPassword] = useState("83r5^_");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  console.log(token);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-  const dispatch = useDispatch();
-  const onSubmit = async (data) => {
-    try {
-      console.log(data);
-      const res = await addLogin(data);
-      reset({ username: "", password: "" });
-      dispatch(setUser(res.data.token));
-      navigate("/admin");
+  
 
-      console.log(res.data.token);
-    } catch (err) {
-      console.log(err);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (!username.trim() || !password.trim()) {
+      return toast.warn("Malumotni to'liq kiriting");
     }
+    let user = { username, password };
+    axios
+      .post(`${API_URL}/auth/login`, user)
+      .then((res) => {
+        console.log("response >>>", res);
+        toast.success("Welcome");
+        localStorage.setItem("token", res.data.token);
+        navigate("/admin");
+      })
+      .catch((err) => {
+        console.log("error >>>", err);
+        toast.error("Username or Password is incorrect");
+      })
+      .finally(() => setLoading(false));
   };
-
   return (
-    <div className="login">
-      <div className="login-top">
-        <div className="container">
-          <div className="d-flex justify-content-center py-2 gap-2">
-            <Link to="/">Home</Link>
-            <p>/</p>
-            <p>Login</p>
-          </div>
-        </div>
-      </div>
-      <div className="login-body">
-        <div className="container">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="d-flex flex-column align-items-center "
-          >
-            <div className="form-group">
-              <label className="login-label" htmlFor="userName">
-                UserName
-              </label>
+    <div className="container">
+      <div className="login__border">
+        <div className="login">
+          <NavLink to={"/"}>
+            <img src={logo} alt="" />
+          </NavLink>
+          <form className="container" onSubmit={handleSubmit}>
+            <h2 className="login__title">Email Address*</h2>
+            <div className="inp__border">
               <input
-                id="userName"
-                value={"mor_2314"}
+                className="login__inp"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 type="text"
-                className="login-input"
-                {...register("username", { required: true })}
               />
-              {errors.userName && (
-                <span className="text-danger">This field is required</span>
-              )}
             </div>
-            <div className="form-group">
-              <label className="login-label" htmlFor="password">
-                Password
-              </label>
+            <h2 className="login__title">Password*</h2>
+            <div className="inp__border">
               <input
-                value={"83r5^_"}
-                id="password"
-                type="password"
-                className="login-input"
-                {...register("password", { required: true })}
+                className="login__inp"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type={ShowPassword ? "text" : "password"}
               />
-              {errors.password && (
-                <span className="text-danger">This field is required</span>
+              {password && (
+                <button
+                  className="see__btn"
+                  type="button"
+                  onClick={() => setShowPassword((p) => !p)}
+                >
+                  {ShowPassword ? <FaEyeSlash /> : <FaRegEye />}
+                </button>
               )}
             </div>
-            <button className="login-button" type="submit">
-              Login
-            </button>
+            <div className="remeber">
+              <div className="checkbox">
+                <input type="checkbox" />
+                <h2 className="chackbox__title">Remember Me</h2>
+              </div>
+              <h2 className="chackbox__title">Forgot Password?</h2>
+            </div>
+            <div className="sing">
+              <button className="login__btn" disabled={loading}>
+                {loading ? "Loading..." : "Login"}
+              </button>
+              <h2 className="chackbox__title">SignUp? </h2>
+            </div>
           </form>
         </div>
       </div>
@@ -88,4 +118,4 @@ export const Login = () => {
   );
 };
 
-export default Login;
+export default memo(Login);

@@ -1,0 +1,77 @@
+.browses {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background-color: rgba(59, 183, 126, 1);
+    padding: 2px 15px;
+    border-radius: 5px;
+}
+
+.browse__opts {
+    background: rgba(59, 183, 126, 1);
+    border: none;
+    color: #fff;
+    font-family: Lato;
+}
+
+.browse__titles {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 44px;
+    font-family: Lato;
+    color: #fff;
+    padding-top: 3px;
+}
+
+.browses svg {
+    color: #fff;
+}
+
+.browse__wrappers {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    justify-content: space-between;
+}
+
+.browse__uls {
+    display: flex;
+    align-items: center;
+}
+.browse__lis {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.browse__contacts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.browse__contacts svg {
+    width: 36px;
+    height: 36px;
+}
+
+.hero__tittles {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer__numberss {
+    font-weight: footer__numberss;
+    font-size: 26px;
+    line-height: 26px;
+    color: rgba(59, 183, 126, 1);
+}
+
+.footer__timess {
+    font-weight: 500;
+    font-family: Lato;
+    font-size: 12px;
+    line-height: 12px;
+    color: rgba(126, 126, 126, 1);
+}

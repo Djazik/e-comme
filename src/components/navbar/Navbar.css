@@ -1,24 +1,145 @@
-.navbar {
-    padding: 14px 0px !important;
-    background-color: rgba(255, 255, 255, 0.271);
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
 }
 
-.nav-list {
-    display: flex;
-    align-items: center;
-    gap: 97px;
+.nav__item div {
+  width: 1px;
+  height: 10px;
+  background-color: #dedfe2;
 }
 
-.nav-link {
-    text-transform: uppercase;
+.nav__item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.navbar.scrolled {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    backdrop-filter: blur(15px);
+.nav__item a {
+  color: #7e7e7e;
+  font-size: 13px;
+  font-weight: 500;
+}
 
+.nav__items {
+  color: #3bb77e;
+}
+
+.nav__item li svg {
+  width: 10.72px;
+  height: 10.64px;
+}
+
+.hero__input {
+  display: flex;
+  gap: 20px;
+}
+
+.hero__location {
+  display: flex;
+}
+
+.hero__line {
+  background-color: #ececec;
+  height: 1px;
+}
+
+.browse {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #3bb77e;
+  width: 255.42px;
+  padding: 5px 24px;
+  border-radius: 5px;
+}
+
+.browse svg {
+  color: #fff;
+}
+
+.browse__opt {
+  color: #fff;
+  background-color: #3bb77e;
+  border: none;
+}
+
+.browse__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 44px;
+  color: #fff;
+}
+
+.browse__wrapper {
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.browse__box {
+  display: flex;
+  align-items: center;
+}
+
+.browse__ul {
+  display: flex;
+align-items: center;  gap: 20px;
+  cursor: pointer;
+}
+
+.browse__li {
+  display: flex;
+  gap: 10px;
+}
+
+.browse__icon svg {
+  width: 8px;
+  height: 8px;
+}
+
+.first__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.browse__contact {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.browse__contact div {
+  display: flex;
+  flex-direction: column;
+}
+
+.browse__contact svg {
+  width: 36px;
+  height: 38px;
+}
+
+.nav__option {
+  border: none;
+}
+
+.footer__numbers {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 26px;
+  color: #3bb77e;
+}
+.footer__times {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.9px;
+  text-align: center;
+  color: #7e7e7e;
+}
+.hero__tittle {
+  display: flex;
 }
