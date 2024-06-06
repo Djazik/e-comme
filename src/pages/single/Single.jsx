@@ -15,6 +15,7 @@ import { MdHomeFilled } from "react-icons/md";
 import { SlArrowRight } from "react-icons/sl";
 import Bannerthree from "../../components/banners/bannerthree/Bannerthree";
 import "./Single.css"
+import Loading from "../../components/loading/Loading";
 
 export const Single = () => {
 
@@ -27,6 +28,10 @@ export const Single = () => {
   let {id} =  useParams()
   let { data, isLoading } = useGetDetailProductQuery(id);
   console.log(data)
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div>
       <div className="single__hero container">
@@ -78,6 +83,7 @@ export const Single = () => {
                 <h4>$52</h4>
               </div>
             </div>
+           
 
             <p className="lorem">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br />{" "}

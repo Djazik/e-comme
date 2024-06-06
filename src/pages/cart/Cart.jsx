@@ -48,51 +48,60 @@ export const Cart = () => {
 
   return (
     <div className=" container cart__wrapper">
-      <div className=" ">
-        <p>
-          Home / <span>Cart</span>
-        </p>
-        {carts.length > 0 && (
-          <div className="clear__all">
-            <button onClick={() => dispatch(deleteAllCart())}>
-              Delete All
-            </button>
-          </div>
-        )}
-        <div className="cart__title">
-          <h3>Product</h3>
-          <h3>Price</h3>
-          <h3>Quantity</h3>
-          <h3>Subtotal</h3>
-        </div>
-
-        <div className="cart_items">
-          {carts.length ? <div>{cartItems}</div> : <Empty />}
-        </div>
-      </div>
-      <div className="">
-        <div className="cart__promo">
-          <input type="text" placeholder="Voucher code" />
-          <button>Redeem</button>
-        </div>
-        <div className="cart__total">
-          <ul>
-            <li>
-              <h2>Subtotal</h2> <p>$998</p>
-            </li>
-            <li>
-              <h2>Shipping fee</h2> <p>$20</p>
-            </li>
-            <li>
-              <h2>Coupon</h2> <p>No</p>
-            </li>
-          </ul>
+     <div className="container cart__wrapper">
+      {carts.length === 0 ? (
+        <Empty />
+      ) : (
+        <>
           <div>
-            <h2>TOTAL</h2>
-            <p></p>
+            <p>
+              Home / <span>Cart</span>
+            </p>
+            {carts.length > 0 && (
+              <div className="clear__all">
+                <button onClick={() => dispatch(deleteAllCart())}>
+                  Delete All
+                </button>
+              </div>
+            )}
+            <div className="cart__title">
+              <h3>Product</h3>
+              <h3>Price</h3>
+              <h3>Quantity</h3>
+              <h3>Subtotal</h3>
+            </div>
+
+            <div className="cart_items">
+              {cartItems}
+            </div>
           </div>
-        </div>
-      </div>
+          <div>
+            <div className="cart__promo">
+              <input type="text" placeholder="Voucher code" />
+              <button>Redeem</button>
+            </div>
+            <div className="cart__total">
+              <ul>
+                <li>
+                  <h2>Subtotal</h2> <p>${totalPrice.toFixed(2)}</p>
+                </li>
+                <li>
+                  <h2>Shipping fee</h2> <p>$20.00</p>
+                </li>
+                <li>
+                  <h2>Coupon</h2> <p>No</p>
+                </li>
+              </ul>
+              <div>
+                <h2>TOTAL</h2>
+                <p>${(totalPrice + 20).toFixed(2)}</p>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+      
     </div>
   );
 };

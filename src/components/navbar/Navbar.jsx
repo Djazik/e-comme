@@ -11,15 +11,15 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./style.css";
 
 export const Navbar = () => {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/products/categories`)
-      .then((res) => setCategories(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+  // const [categories, setCategories] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${API_URL}/products/categories`)
+  //     .then((res) => setCategories(res.data))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
-  let categoryItems = categories?.map((el, inx) => <option key={inx} value={el}>{el}</option>);
+  // let categoryItems = categories?.map((el, inx) => <option key={inx} value={el}>{el}</option>);
 
   return (
     <div className="navbar">
@@ -31,17 +31,17 @@ export const Navbar = () => {
         <div className="hero__input">
           <select className="hero__select" name="" id="">
             <option value="">All Categories</option>
-            {categoryItems}
+            {/* {categoryItems} */}
           </select>
           <div className="hero_line"></div>
           <input type="text" placeholder="Search for items... " />
-          <IoSearch />
+          <IoSearch className="search__btn" />
         </div>
 
         <div className="hero__location">
-          <IoLocationSharp />
+          <IoLocationSharp className="location__svg" />
           <h4>Your Location</h4>
-          <SlArrowDown />
+          <SlArrowDown  className="svg"/>
         </div>
 
         <div className="link__items">

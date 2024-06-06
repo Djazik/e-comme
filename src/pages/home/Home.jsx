@@ -6,13 +6,16 @@ import Best from "../../components/best/Best"
 import Fearured from "../../components/featured/Fearured"
 import { useGetProductsQuery, useGetDetailProductQuery } from "../../context/api/ProductApi"
 import { Products } from "./components"
+import Loading from "../../components/loading/Loading"
 
 export const Home = () => {
   const [offset, setOffset] = useState(1)
  let {data, isLoading,error} = useGetProductsQuery({limit:5 * offset})
  let {data: detailProduct, isLoading:isDetailLoading} = useGetDetailProductQuery(4)
  
-
+ if (isLoading) {
+  return <Loading />;
+}
   return (
     <div>
       <Banner/>
